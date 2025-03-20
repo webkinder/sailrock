@@ -2,11 +2,11 @@
 services:
     laravel.test:
         build:
-            context: ./vendor/laravel/sail/runtimes/{{PHP_VERSION}}
+            context: ./vendor/webkinder/sailrock/runtimes/{{PHP_VERSION}}
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
-        image: sail-{{PHP_VERSION}}/app
+        image: sailrock-{{PHP_VERSION}}/app
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
@@ -14,14 +14,14 @@ services:
             - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
         environment:
             WWWUSER: '${WWWUSER}'
-            LARAVEL_SAIL: 1
-            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
-            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+            SAILROCK: 1
+            XDEBUG_MODE: '${SAILROCK_XDEBUG_MODE:-off}'
+            XDEBUG_CONFIG: '${SAILROCK_XDEBUG_CONFIG:-client_host=host.docker.internal}'
             IGNITION_LOCAL_SITES_PATH: '${PWD}'
         volumes:
             - '.:/var/www/html'
         networks:
-            - sail
+            - sailrock
 networks:
-    sail:
+    sailrock:
         driver: bridge

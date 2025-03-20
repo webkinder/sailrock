@@ -1,11 +1,11 @@
 {
-    "name": "laravel/sail",
-    "description": "Docker files for running a basic Laravel application.",
-    "keywords": ["laravel", "docker"],
+    "name": "webkinder/sailrock",
+    "description": "Docker files for running a basic Bedrock application. Inspired by Laravel Sail.",
+    "keywords": ["bedrock", "docker"],
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/laravel/sail/issues",
-        "source": "https://github.com/laravel/sail"
+        "issues": "https://github.com/webkinder/sailrock/issues",
+        "source": "https://github.com/webkinder/sailrock"
     },
     "authors": [
         {
@@ -26,17 +26,17 @@
         "phpstan/phpstan": "^1.10"
     },
     "bin": [
-        "bin/sail"
+        "bin/sailrock"
     ],
     "autoload": {
         "psr-4": {
-            "Laravel\\Sail\\": "src/"
+            "Webkinder\\Sailrock\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Laravel\\Sail\\SailServiceProvider"
+                "Webkinder\\Sailrock\\SailrockServiceProvider"
             ]
         }
     },

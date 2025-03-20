@@ -10,7 +10,7 @@ case "${UNAMEOUT}" in
 esac
 
 if [ "$MACHINE" == "UNKNOWN" ]; then
-    echo "Unsupported operating system [$(uname -s)]. Laravel Sail supports macOS, Linux, and Windows (WSL2)." >&2
+    echo "Unsupported operating system [$(uname -s)]. Sailrock supports macOS, Linux, and Windows (WSL2)." >&2
 
     exit 1
 fi
@@ -30,93 +30,93 @@ fi
 
 # Function that prints the available commands...
 function display_help {
-    echo "Laravel Sail"
+    echo "Sailrock"
     echo
     echo "${YELLOW}Usage:${NC}" >&2
-    echo "  sail COMMAND [options] [arguments]"
+    echo "  sailrock COMMAND [options] [arguments]"
     echo
     echo "Unknown commands are passed to the docker-compose binary."
     echo
     echo "${YELLOW}docker-compose Commands:${NC}"
-    echo "  ${GREEN}sail up${NC}        Start the application"
-    echo "  ${GREEN}sail up -d${NC}     Start the application in the background"
-    echo "  ${GREEN}sail stop${NC}      Stop the application"
-    echo "  ${GREEN}sail restart${NC}   Restart the application"
-    echo "  ${GREEN}sail ps${NC}        Display the status of all containers"
+    echo "  ${GREEN}sailrock up${NC}        Start the application"
+    echo "  ${GREEN}sailrock up -d${NC}     Start the application in the background"
+    echo "  ${GREEN}sailrock stop${NC}      Stop the application"
+    echo "  ${GREEN}sailrock restart${NC}   Restart the application"
+    echo "  ${GREEN}sailrock ps${NC}        Display the status of all containers"
     echo
     echo "${YELLOW}Artisan Commands:${NC}"
-    echo "  ${GREEN}sail artisan ...${NC}          Run an Artisan command"
-    echo "  ${GREEN}sail artisan queue:work${NC}"
+    echo "  ${GREEN}sailrock artisan ...${NC}          Run an Artisan command"
+    echo "  ${GREEN}sailrock artisan queue:work${NC}"
     echo
     echo "${YELLOW}PHP Commands:${NC}"
-    echo "  ${GREEN}sail php ...${NC}   Run a snippet of PHP code"
-    echo "  ${GREEN}sail php -v${NC}"
+    echo "  ${GREEN}sailrock php ...${NC}   Run a snippet of PHP code"
+    echo "  ${GREEN}sailrock php -v${NC}"
     echo
     echo "${YELLOW}Composer Commands:${NC}"
-    echo "  ${GREEN}sail composer ...${NC}                       Run a Composer command"
-    echo "  ${GREEN}sail composer require laravel/sanctum${NC}"
+    echo "  ${GREEN}sailrock composer ...${NC}                       Run a Composer command"
+    echo "  ${GREEN}sailrock composer require laravel/sanctum${NC}"
     echo
     echo "${YELLOW}Node Commands:${NC}"
-    echo "  ${GREEN}sail node ...${NC}         Run a Node command"
-    echo "  ${GREEN}sail node --version${NC}"
+    echo "  ${GREEN}sailrock node ...${NC}         Run a Node command"
+    echo "  ${GREEN}sailrock node --version${NC}"
     echo
     echo "${YELLOW}NPM Commands:${NC}"
-    echo "  ${GREEN}sail npm ...${NC}        Run a npm command"
-    echo "  ${GREEN}sail npx${NC}            Run a npx command"
-    echo "  ${GREEN}sail npm run prod${NC}"
+    echo "  ${GREEN}sailrock npm ...${NC}        Run a npm command"
+    echo "  ${GREEN}sailrock npx${NC}            Run a npx command"
+    echo "  ${GREEN}sailrock npm run prod${NC}"
     echo
     echo "${YELLOW}PNPM Commands:${NC}"
-    echo "  ${GREEN}sail pnpm ...${NC}        Run a pnpm command"
-    echo "  ${GREEN}sail pnpx${NC}            Run a pnpx command"
-    echo "  ${GREEN}sail pnpm run prod${NC}"
+    echo "  ${GREEN}sailrock pnpm ...${NC}        Run a pnpm command"
+    echo "  ${GREEN}sailrock pnpx${NC}            Run a pnpx command"
+    echo "  ${GREEN}sailrock pnpm run prod${NC}"
     echo
     echo "${YELLOW}Yarn Commands:${NC}"
-    echo "  ${GREEN}sail yarn ...${NC}        Run a Yarn command"
-    echo "  ${GREEN}sail yarn run prod${NC}"
+    echo "  ${GREEN}sailrock yarn ...${NC}        Run a Yarn command"
+    echo "  ${GREEN}sailrock yarn run prod${NC}"
     echo
     echo "${YELLOW}Bun Commands:${NC}"
-    echo "  ${GREEN}sail bun ...${NC}        Run a bun command"
-    echo "  ${GREEN}sail bunx${NC}           Run a bunx command"
-    echo "  ${GREEN}sail bun run prod${NC}"
+    echo "  ${GREEN}sailrock bun ...${NC}        Run a bun command"
+    echo "  ${GREEN}sailrock bunx${NC}           Run a bunx command"
+    echo "  ${GREEN}sailrock bun run prod${NC}"
     echo
     echo "${YELLOW}Database Commands:${NC}"
-    echo "  ${GREEN}sail mysql${NC}     Start a MySQL CLI session within the 'mysql' container"
-    echo "  ${GREEN}sail mariadb${NC}   Start a MySQL CLI session within the 'mariadb' container"
-    echo "  ${GREEN}sail psql${NC}      Start a PostgreSQL CLI session within the 'pgsql' container"
-    echo "  ${GREEN}sail mongodb${NC}   Start a Mongo Shell session within the 'mongodb' container"
-    echo "  ${GREEN}sail redis${NC}     Start a Redis CLI session within the 'redis' container"
-    echo "  ${GREEN}sail valkey${NC}    Start a Valkey CLI session within the 'valkey' container"
+    echo "  ${GREEN}sailrock mysql${NC}     Start a MySQL CLI session within the 'mysql' container"
+    echo "  ${GREEN}sailrock mariadb${NC}   Start a MySQL CLI session within the 'mariadb' container"
+    echo "  ${GREEN}sailrock psql${NC}      Start a PostgreSQL CLI session within the 'pgsql' container"
+    echo "  ${GREEN}sailrock mongodb${NC}   Start a Mongo Shell session within the 'mongodb' container"
+    echo "  ${GREEN}sailrock redis${NC}     Start a Redis CLI session within the 'redis' container"
+    echo "  ${GREEN}sailrock valkey${NC}    Start a Valkey CLI session within the 'valkey' container"
     echo
     echo "${YELLOW}Debugging:${NC}"
-    echo "  ${GREEN}sail debug ...${NC}          Run an Artisan command in debug mode"
-    echo "  ${GREEN}sail debug queue:work${NC}"
+    echo "  ${GREEN}sailrock debug ...${NC}          Run an Artisan command in debug mode"
+    echo "  ${GREEN}sailrock debug queue:work${NC}"
     echo
     echo "${YELLOW}Running Tests:${NC}"
-    echo "  ${GREEN}sail test${NC}          Run the PHPUnit tests via the Artisan test command"
-    echo "  ${GREEN}sail phpunit ...${NC}   Run PHPUnit"
-    echo "  ${GREEN}sail pest ...${NC}      Run Pest"
-    echo "  ${GREEN}sail pint ...${NC}      Run Pint"
-    echo "  ${GREEN}sail dusk${NC}          Run the Dusk tests (Requires the laravel/dusk package)"
-    echo "  ${GREEN}sail dusk:fails${NC}    Re-run previously failed Dusk tests (Requires the laravel/dusk package)"
+    echo "  ${GREEN}sailrock test${NC}          Run the PHPUnit tests via the Artisan test command"
+    echo "  ${GREEN}sailrock phpunit ...${NC}   Run PHPUnit"
+    echo "  ${GREEN}sailrock pest ...${NC}      Run Pest"
+    echo "  ${GREEN}sailrock pint ...${NC}      Run Pint"
+    echo "  ${GREEN}sailrock dusk${NC}          Run the Dusk tests (Requires the laravel/dusk package)"
+    echo "  ${GREEN}sailrock dusk:fails${NC}    Re-run previously failed Dusk tests (Requires the laravel/dusk package)"
     echo
     echo "${YELLOW}Container CLI:${NC}"
-    echo "  ${GREEN}sail shell${NC}        Start a shell session within the application container"
-    echo "  ${GREEN}sail bash${NC}         Alias for 'sail shell'"
-    echo "  ${GREEN}sail root-shell${NC}   Start a root shell session within the application container"
-    echo "  ${GREEN}sail root-bash${NC}    Alias for 'sail root-shell'"
-    echo "  ${GREEN}sail tinker${NC}       Start a new Laravel Tinker session"
+    echo "  ${GREEN}sailrock shell${NC}        Start a shell session within the application container"
+    echo "  ${GREEN}sailrock bash${NC}         Alias for 'sailrock shell'"
+    echo "  ${GREEN}sailrock root-shell${NC}   Start a root shell session within the application container"
+    echo "  ${GREEN}sailrock root-bash${NC}    Alias for 'sailrock root-shell'"
+    echo "  ${GREEN}sailrock tinker${NC}       Start a new Laravel Tinker session"
     echo
     echo "${YELLOW}Sharing:${NC}"
-    echo "  ${GREEN}sail share${NC}   Share the application publicly via a temporary URL"
-    echo "  ${GREEN}sail open${NC}    Open the site in your browser"
+    echo "  ${GREEN}sailrock share${NC}   Share the application publicly via a temporary URL"
+    echo "  ${GREEN}sailrock open${NC}    Open the site in your browser"
     echo
     echo "${YELLOW}Binaries:${NC}"
-    echo "  ${GREEN}sail bin ...${NC}   Run Composer binary scripts from the vendor/bin directory"
-    echo "  ${GREEN}sail run ...${NC}   Run a command within the application container"
+    echo "  ${GREEN}sailrock bin ...${NC}   Run Composer binary scripts from the vendor/bin directory"
+    echo "  ${GREEN}sailrock run ...${NC}   Run a command within the application container"
     echo
     echo "${YELLOW}Customization:${NC}"
-    echo "  ${GREEN}sail artisan sail:publish${NC}   Publish the Sail configuration files"
-    echo "  ${GREEN}sail build --no-cache${NC}       Rebuild all of the Sail containers"
+    echo "  ${GREEN}sailrock artisan sailrock:publish${NC}   Publish the Sailrock configuration files"
+    echo "  ${GREEN}sailrock build --no-cache${NC}       Rebuild all of the Sailrock containers"
 
     exit 1
 }
@@ -145,19 +145,19 @@ export DB_PORT=${DB_PORT:-3306}
 export WWWUSER=${WWWUSER:-$UID}
 export WWWGROUP=${WWWGROUP:-$(id -g)}
 
-export SAIL_FILES=${SAIL_FILES:-""}
-export SAIL_SHARE_DASHBOARD=${SAIL_SHARE_DASHBOARD:-4040}
-export SAIL_SHARE_SERVER_HOST=${SAIL_SHARE_SERVER_HOST:-"laravel-sail.site"}
-export SAIL_SHARE_SERVER_PORT=${SAIL_SHARE_SERVER_PORT:-8080}
-export SAIL_SHARE_SUBDOMAIN=${SAIL_SHARE_SUBDOMAIN:-""}
-export SAIL_SHARE_DOMAIN=${SAIL_SHARE_DOMAIN:-"$SAIL_SHARE_SERVER_HOST"}
-export SAIL_SHARE_SERVER=${SAIL_SHARE_SERVER:-""}
+export SAILROCK_FILES=${SAILROCK_FILES:-""}
+export SAILROCK_SHARE_DASHBOARD=${SAILROCK_SHARE_DASHBOARD:-4040}
+export SAILROCK_SHARE_SERVER_HOST=${SAILROCK_SHARE_SERVER_HOST:-"laravel-sail.site"}
+export SAILROCK_SHARE_SERVER_PORT=${SAILROCK_SHARE_SERVER_PORT:-8080}
+export SAILROCK_SHARE_SUBDOMAIN=${SAILROCK_SHARE_SUBDOMAIN:-""}
+export SAILROCK_SHARE_DOMAIN=${SAILROCK_SHARE_DOMAIN:-"$SAILROCK_SHARE_SERVER_HOST"}
+export SAILROCK_SHARE_SERVER=${SAILROCK_SHARE_SERVER:-""}
 
-# Function that outputs Sail is not running...
-function sail_is_not_running {
-    echo "${BOLD}Sail is not running.${NC}" >&2
+# Function that outputs Sailrock is not running...
+function sailrock_is_not_running {
+    echo "${BOLD}Sailrock is not running.${NC}" >&2
     echo "" >&2
-    echo "${BOLD}You may Sail using the following commands:${NC} './vendor/bin/sail up' or './vendor/bin/sail up -d'" >&2
+    echo "${BOLD}You may Sailrock using the following commands:${NC} './vendor/bin/sailrock up' or './vendor/bin/sailrock up -d'" >&2
 
     exit 1
 }
@@ -169,11 +169,11 @@ else
     DOCKER_COMPOSE=(docker-compose)
 fi
 
-if [ -n "$SAIL_FILES" ]; then
-    # Convert SAIL_FILES to an array...
-    IFS=':' read -ra SAIL_FILES <<< "$SAIL_FILES"
+if [ -n "$SAILROCK_FILES" ]; then
+    # Convert SAILROCK_FILES to an array...
+    IFS=':' read -ra SAILROCK_FILES <<< "$SAILROCK_FILES"
 
-    for FILE in "${SAIL_FILES[@]}"; do
+    for FILE in "${SAILROCK_FILES[@]}"; do
         if [ -f "$FILE" ]; then
             DOCKER_COMPOSE+=(-f "$FILE")
         else
@@ -186,7 +186,7 @@ fi
 
 EXEC="yes"
 
-if [ -z "$SAIL_SKIP_CHECKS" ]; then
+if [ -z "$SAILROCK_SKIP_CHECKS" ]; then
     # Ensure that Docker is running...
     if ! docker info > /dev/null 2>&1; then
         echo "${BOLD}Docker is not running.${NC}" >&2
@@ -194,9 +194,9 @@ if [ -z "$SAIL_SKIP_CHECKS" ]; then
         exit 1
     fi
 
-    # Determine if Sail is currently up...
+    # Determine if Sailrock is currently up...
     if "${DOCKER_COMPOSE[@]}" ps "$APP_SERVICE" 2>&1 | grep 'Exit\|exited'; then
-        echo "${BOLD}Shutting down old Sail processes...${NC}" >&2
+        echo "${BOLD}Shutting down old Sail rockprocesses...${NC}" >&2
 
         "${DOCKER_COMPOSE[@]}" down > /dev/null 2>&1
 
@@ -213,7 +213,7 @@ if [ "$1" == "php" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" "php")
     else
@@ -227,11 +227,11 @@ elif [ "$1" == "bin" ]; then
     if [ "$EXEC" == "yes" ]; then
         CMD=$1
         shift 1
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" ./vendor/bin/"$CMD")
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy commands on the application container...
@@ -241,11 +241,11 @@ elif [ "$1" == "run" ]; then
     if [ "$EXEC" == "yes" ]; then
         CMD=$1
         shift 1
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" "$CMD")
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy docker-compose commands to the docker-compose binary on the application container...
@@ -253,11 +253,11 @@ elif [ "$1" == "docker-compose" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" "${DOCKER_COMPOSE[@]}")
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy Composer commands to the "composer" binary on the application container...
@@ -265,11 +265,11 @@ elif [ "$1" == "composer" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" "composer")
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy Artisan commands to the "artisan" binary on the application container...
@@ -277,11 +277,11 @@ elif [ "$1" == "artisan" ] || [ "$1" == "art" ] || [ "$1" == "a" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" php artisan)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy the "debug" command to the "php artisan" binary on the application container with xdebug enabled...
@@ -289,11 +289,11 @@ elif [ "$1" == "debug" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail -e XDEBUG_TRIGGER=1)
+        ARGS+=(exec -u sailrock -e XDEBUG_TRIGGER=1)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" php artisan)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy the "test" command to the "php artisan test" Artisan command...
@@ -301,11 +301,11 @@ elif [ "$1" == "test" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" php artisan test)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy the "phpunit" command to "php vendor/bin/phpunit"...
@@ -313,11 +313,11 @@ elif [ "$1" == "phpunit" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" php vendor/bin/phpunit)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy the "pest" command to "php vendor/bin/pest"...
@@ -325,11 +325,11 @@ elif [ "$1" == "pest" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" php vendor/bin/pest)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy the "pint" command to "php vendor/bin/pint"...
@@ -337,11 +337,11 @@ elif [ "$1" == "pint" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" php vendor/bin/pint)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy the "dusk" command to the "php artisan dusk" Artisan command...
@@ -349,13 +349,13 @@ elif [ "$1" == "dusk" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=(-e "APP_URL=http://${APP_SERVICE}")
         ARGS+=(-e "DUSK_DRIVER_URL=http://selenium:4444/wd/hub")
         ARGS+=("$APP_SERVICE" php artisan dusk)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy the "dusk:fails" command to the "php artisan dusk:fails" Artisan command...
@@ -363,13 +363,13 @@ elif [ "$1" == "dusk:fails" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=(-e "APP_URL=http://${APP_SERVICE}")
         ARGS+=(-e "DUSK_DRIVER_URL=http://selenium:4444/wd/hub")
         ARGS+=("$APP_SERVICE" php artisan dusk:fails)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Initiate a Laravel Tinker session within the application container...
@@ -377,11 +377,11 @@ elif [ "$1" == "tinker" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" php artisan tinker)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy Node commands to the "node" binary on the application container...
@@ -389,11 +389,11 @@ elif [ "$1" == "node" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" node)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy NPM commands to the "npm" binary on the application container...
@@ -401,11 +401,11 @@ elif [ "$1" == "npm" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" npm)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy NPX commands to the "npx" binary on the application container...
@@ -413,11 +413,11 @@ elif [ "$1" == "npx" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" npx)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy PNPM commands to the "pnpm" binary on the application container...
@@ -425,11 +425,11 @@ elif [ "$1" == "pnpm" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" pnpm)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy PNPX commands to the "pnpx" binary on the application container...
@@ -437,11 +437,11 @@ elif [ "$1" == "pnpx" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" pnpx)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy Yarn commands to the "yarn" binary on the application container...
@@ -449,11 +449,11 @@ elif [ "$1" == "yarn" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" yarn)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy Bun commands to the "bun" binary on the application container...
@@ -461,11 +461,11 @@ elif [ "$1" == "bun" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" bun)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy Bun X commands to the "bunx" binary on the application container...
@@ -473,11 +473,11 @@ elif [ "$1" == "bunx" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" bunx)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Initiate a MySQL CLI terminal session within the "mysql" container...
@@ -490,7 +490,7 @@ elif [ "$1" == "mysql" ]; then
         ARGS+=(mysql bash -c)
         ARGS+=("MYSQL_PWD=\${MYSQL_PASSWORD} mysql -u \${MYSQL_USER} \${MYSQL_DATABASE}")
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Initiate a MySQL CLI terminal session within the "mariadb" container...
@@ -503,7 +503,7 @@ elif [ "$1" == "mariadb" ]; then
         ARGS+=(mariadb bash -c)
         ARGS+=("MYSQL_PWD=\${MYSQL_PASSWORD} mariadb -u \${MYSQL_USER} \${MYSQL_DATABASE}")
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Initiate a PostgreSQL CLI terminal session within the "pgsql" container...
@@ -516,7 +516,7 @@ elif [ "$1" == "psql" ]; then
         ARGS+=(pgsql bash -c)
         ARGS+=("PGPASSWORD=\${PGPASSWORD} psql -U \${POSTGRES_USER} \${POSTGRES_DB}")
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Initiate a Bash shell within the application container...
@@ -524,11 +524,11 @@ elif [ "$1" == "shell" ] || [ "$1" == "bash" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        ARGS+=(exec -u sail)
+        ARGS+=(exec -u sailrock)
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" bash)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Initiate a root user Bash shell within the application container...
@@ -540,7 +540,7 @@ elif [ "$1" == "root-shell" ] || [ "$1" == "root-bash" ]; then
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" bash)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Initiate a MongoDB Shell within the "mongodb" container...
@@ -552,7 +552,7 @@ elif [ "$1" == "mongodb" ]; then
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=(mongodb mongosh --port "${FORWARD_MONGODB_PORT:-27017}" --username "$MONGODB_USERNAME" --password "$MONGODB_PASSWORD" --authenticationDatabase admin)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Initiate a Redis CLI terminal session within the "redis" container...
@@ -564,7 +564,7 @@ elif [ "$1" == "redis" ]; then
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=(redis redis-cli)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Initiate a Valkey CLI terminal session within the "valkey" container...
@@ -576,7 +576,7 @@ elif [ "$1" == "valkey" ]; then
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=(valkey valkey-cli)
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Share the site...
@@ -584,18 +584,18 @@ elif [ "$1" == "share" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
-        docker run --init --rm --add-host=host.docker.internal:host-gateway -p "$SAIL_SHARE_DASHBOARD":4040 -t beyondcodegmbh/expose-server:latest share http://host.docker.internal:"$APP_PORT" \
-            --server-host="$SAIL_SHARE_SERVER_HOST" \
-            --server-port="$SAIL_SHARE_SERVER_PORT" \
-            --auth="$SAIL_SHARE_TOKEN" \
-            --server="$SAIL_SHARE_SERVER" \
-            --subdomain="$SAIL_SHARE_SUBDOMAIN" \
-            --domain="$SAIL_SHARE_DOMAIN" \
+        docker run --init --rm --add-host=host.docker.internal:host-gateway -p "$SAILROCK_SHARE_DASHBOARD":4040 -t beyondcodegmbh/expose-server:latest share http://host.docker.internal:"$APP_PORT" \
+            --server-host="$SAILROCK_SHARE_SERVER_HOST" \
+            --server-port="$SAILROCK_SHARE_SERVER_PORT" \
+            --auth="$SAILROCK_SHARE_TOKEN" \
+            --server="$SAILROCK_SHARE_SERVER" \
+            --subdomain="$SAILROCK_SHARE_SUBDOMAIN" \
+            --domain="$SAILROCK_SHARE_DOMAIN" \
             "$@"
 
         exit
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Open the site...
@@ -623,7 +623,7 @@ elif [ "$1" == "open" ]; then
 
         exit
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 fi
 

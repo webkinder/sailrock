@@ -196,7 +196,7 @@ if [ -z "$SAILROCK_SKIP_CHECKS" ]; then
 
     # Determine if Sailrock is currently up...
     if "${DOCKER_COMPOSE[@]}" ps "$APP_SERVICE" 2>&1 | grep 'Exit\|exited'; then
-        echo "${BOLD}Shutting down old Sail rockprocesses...${NC}" >&2
+        echo "${BOLD}Shutting down old Sailrock rockprocesses...${NC}" >&2
 
         "${DOCKER_COMPOSE[@]}" down > /dev/null 2>&1
 
@@ -217,7 +217,7 @@ if [ "$1" == "php" ]; then
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" "php")
     else
-        sail_is_not_running
+        sailrock_is_not_running
     fi
 
 # Proxy vendor binary commands on the application container...

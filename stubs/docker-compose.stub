@@ -20,11 +20,6 @@ services:
             IGNITION_LOCAL_SITES_PATH: '${PWD}'
         volumes:
             - '.:/var/www/html'
-            - ${HOME}/.ssh:/home/bedrock/.ssh:ro
-            - ${HOME}/.gitconfig:/home/bedrock/.gitconfig:ro
-            - ${HOME}/.npmrc:/home/bedrock/.npmrc:ro
-            - ${HOME}/.config/composer/auth.json:/home/bedrock/.config/composer/auth.json:ro
-            - ${SOIL_COMPOSER_PATH:-/dev/null}:/home/bedrock/soil
         networks:
             - sailrock
 networks:

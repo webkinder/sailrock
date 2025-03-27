@@ -10,6 +10,7 @@ WORKDIR /var/www/html
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
+ENV SUPERVISOR_PHP_DIR="/var/www/html/web"
 ENV SUPERVISOR_PHP_COMMAND="/usr/bin/php -S 0.0.0.0:80 /var/www/html/vendor/webkinder/sailrock/runtimes/8.2/server.php"
 ENV SUPERVISOR_PHP_USER="sailrock"
 

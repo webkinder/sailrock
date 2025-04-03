@@ -61,7 +61,7 @@ trait InteractsWithDockerComposeServices
      */
     protected function buildDockerCompose(array $services)
     {
-        $composePath = base_path('docker-compose.yml');
+        $composePath = base_path('../../../../docker-compose.yml');
 
         $compose = file_exists($composePath)
             ? Yaml::parseFile($composePath)
@@ -110,7 +110,7 @@ trait InteractsWithDockerComposeServices
 
         $yaml = str_replace('{{PHP_VERSION}}', $this->hasOption('php') ? $this->option('php') : '8.4', $yaml);
 
-        file_put_contents($this->laravel->basePath('docker-compose.yml'), $yaml);
+        file_put_contents($this->laravel->basePath('../../../../docker-compose.yml'), $yaml);
     }
 
     /**
@@ -121,7 +121,7 @@ trait InteractsWithDockerComposeServices
      */
     protected function replaceEnvVariables(array $services)
     {
-        $environment = file_get_contents($this->laravel->basePath('.env'));
+        $environment = file_get_contents($this->laravel->basePath('../../../../.env'));
 
         if (in_array('mysql', $services) ||
             in_array('mariadb', $services) ||
@@ -205,7 +205,7 @@ trait InteractsWithDockerComposeServices
             $environment = preg_replace("/^MAIL_PORT=(.*)/m", "MAIL_PORT=1025", $environment);
         }
 
-        file_put_contents($this->laravel->basePath('.env'), $environment);
+        file_put_contents($this->laravel->basePath('../../../../.env'), $environment);
     }
 
     /**
@@ -215,8 +215,8 @@ trait InteractsWithDockerComposeServices
      */
     protected function configurePhpUnit()
     {
-        if (! file_exists($path = $this->laravel->basePath('phpunit.xml'))) {
-            $path = $this->laravel->basePath('phpunit.xml.dist');
+        if (! file_exists($path = $this->laravel->basePath('../../../../phpunit.xml'))) {
+            $path = $this->laravel->basePath('../../../../phpunit.xml.dist');
 
             if (! file_exists($path)) {
                 return;
@@ -228,7 +228,7 @@ trait InteractsWithDockerComposeServices
         $phpunit = preg_replace('/^.*DB_CONNECTION.*\n/m', '', $phpunit);
         $phpunit = str_replace('<!-- <env name="DB_DATABASE" value=":memory:"/> -->', '<env name="DB_DATABASE" value="testing"/>', $phpunit);
 
-        file_put_contents($this->laravel->basePath('phpunit.xml'), $phpunit);
+        file_put_contents($this->laravel->basePath('../../../../phpunit.xml'), $phpunit);
     }
 
     /**
@@ -238,21 +238,21 @@ trait InteractsWithDockerComposeServices
      */
     protected function installDevContainer()
     {
-        if (! is_dir($this->laravel->basePath('.devcontainer'))) {
-            mkdir($this->laravel->basePath('.devcontainer'), 0755, true);
+        if (! is_dir($this->laravel->basePath('../../../../.devcontainer'))) {
+            mkdir($this->laravel->basePath('../../../../.devcontainer'), 0755, true);
         }
 
         file_put_contents(
-            $this->laravel->basePath('.devcontainer/devcontainer.json'),
+            $this->laravel->basePath('../../../../.devcontainer/devcontainer.json'),
             file_get_contents(__DIR__.'/../../../stubs/devcontainer.stub')
         );
 
-        $environment = file_get_contents($this->laravel->basePath('.env'));
+        $environment = file_get_contents($this->laravel->basePath('../../../../.env'));
 
         $environment .= "\nWWWGROUP=1000";
         $environment .= "\nWWWUSER=1000\n";
 
-        file_put_contents($this->laravel->basePath('.env'), $environment);
+        file_put_contents($this->laravel->basePath('../../../../.env'), $environment);
     }
 
     /**

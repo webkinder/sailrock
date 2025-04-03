@@ -46,15 +46,15 @@ class SailrockServiceProvider extends ServiceProvider implements DeferrableProvi
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../runtimes' => $this->app->basePath('docker'),
+                __DIR__ . '/../runtimes' => $this->app->basePath('../../../../docker'),
             ], ['sailrock', 'sailrock-docker']);
 
             $this->publishes([
-                __DIR__ . '/../bin/sailrock' => $this->app->basePath('sailrock'),
+                __DIR__ . '/../bin/sailrock' => $this->app->basePath('../../../../sailrock'),
             ], ['sailrock', 'sailrock-bin']);
 
             $this->publishes([
-                __DIR__ . '/../database' => $this->app->basePath('docker'),
+                __DIR__ . '/../database' => $this->app->basePath('../../../../docker'),
             ], ['sailrock', 'sailrock-database']);
         }
     }

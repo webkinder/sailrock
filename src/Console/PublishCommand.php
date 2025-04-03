@@ -33,7 +33,7 @@ class PublishCommand extends Command
         $this->call('vendor:publish', ['--tag' => 'sailrock-database']);
 
         file_put_contents(
-            $this->laravel->basePath('docker-compose.yml'),
+            $this->laravel->basePath('../../../../docker-compose.yml'),
             str_replace(
                 [
                     './vendor/webkinder/sailrock/runtimes/8.4',
@@ -53,7 +53,7 @@ class PublishCommand extends Command
                     './docker/mysql',
                     './docker/pgsql'
                 ],
-                file_get_contents($this->laravel->basePath('docker-compose.yml'))
+                file_get_contents($this->laravel->basePath('../../../../docker-compose.yml'))
             )
         );
     }

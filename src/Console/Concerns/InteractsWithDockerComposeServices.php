@@ -69,14 +69,14 @@ trait InteractsWithDockerComposeServices
 
         // Prepare the installation of the "mariadb-client" package if the MariaDB service is used...
         if (in_array('mariadb', $services)) {
-            $compose['services']['laravel.test']['build']['args']['MYSQL_CLIENT'] = 'mariadb-client';
+            $compose['services']['bedrock.test']['build']['args']['MYSQL_CLIENT'] = 'mariadb-client';
         }
 
-        // Adds the new services as dependencies of the laravel.test service...
-        if (! array_key_exists('laravel.test', $compose['services'])) {
-            $this->warn('Couldn\'t find the laravel.test service. Make sure you add ['.implode(',', $services).'] to the depends_on config.');
+        // Adds the new services as dependencies of the bedrock.test service...
+        if (! array_key_exists('bedrock.test', $compose['services'])) {
+            $this->warn('Couldn\'t find the bedrock.test service. Make sure you add ['.implode(',', $services).'] to the depends_on config.');
         } else {
-            $compose['services']['laravel.test']['depends_on'] = collect($compose['services']['laravel.test']['depends_on'] ?? [])
+            $compose['services']['bedrock.test']['depends_on'] = collect($compose['services']['bedrock.test']['depends_on'] ?? [])
                 ->merge($services)
                 ->unique()
                 ->values()
@@ -129,7 +129,7 @@ trait InteractsWithDockerComposeServices
             $defaults = [
                 '# DB_HOST=127.0.0.1',
                 '# DB_PORT=3306',
-                '# DB_DATABASE=laravel',
+                '# DB_DATABASE=bedrock',
                 '# DB_USERNAME=root',
                 '# DB_PASSWORD=',
             ];
@@ -171,7 +171,7 @@ trait InteractsWithDockerComposeServices
 
         if (in_array('mongodb', $services)) {
             $environment .= "\nMONGODB_URI=mongodb://mongodb:27017";
-            $environment .= "\nMONGODB_DATABASE=laravel";
+            $environment .= "\nMONGODB_DATABASE=bedrock";
         }
 
         if (in_array('meilisearch', $services)) {

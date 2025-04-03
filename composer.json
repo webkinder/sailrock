@@ -34,7 +34,7 @@
         }
     },
     "extra": {
-        "laravel": {
+        "acorn": {
             "providers": [
                 "Webkinder\\Sailrock\\SailrockServiceProvider"
             ]
